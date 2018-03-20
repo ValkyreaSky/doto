@@ -41,6 +41,7 @@
     "identity-obj-proxy": "^3.0.0",
     "img-loader": "^2.0.1",
     "jest": "^22.4.2",
+    "moment": "^2.21.0",
     "node-sass": "^4.8.1",
     "postcss-flexbugs-fixes": "^3.3.0",
     "postcss-loader": "^2.1.2",
