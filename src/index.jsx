@@ -2,6 +2,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Test } from 'Components';
+import { ListContainer } from 'Containers';
 
-ReactDOM.render(<Test />, document.getElementById('app'));
+ReactDOM.render(<ListContainer />, document.getElementById('app'));
