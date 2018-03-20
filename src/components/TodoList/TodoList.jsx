@@ -8,7 +8,7 @@ class TodoList extends Component {
 	
 		const renderTodos = () => (
 			todos.map((todo) => (
-				<Todo key={todo.id} {...todo}/>
+				<Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>
 			))
 		);
 
