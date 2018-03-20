@@ -89,7 +89,7 @@ module.exports = (env) => {
     plugins: [
       new HTMLPlugin({
         filename: 'index.html',
-        title: 'Weather App',
+        title: 'Doto',
         template: './src/templates/index.html',
         minify: {
           collapseWhitespace: isProduction
