@@ -1,20 +1,31 @@
-const mongoose = require('mongoose');
+const express = require('express');
+const bodyParser = require('body-parser');
+const server = express();
+
+const { mongoose } = require('./database/mongose');
 const { Todo } = require('./models/Todo');
+const { User } = require('./models/User');
 
-mongoose.Promise = global.Promise; // Set up Promises for mongoose
-mongoose.connect('mongodb://localhost:27017/TodoApp');
+const port = process.env.port || 3000;
 
-var newTodo = new Todo({
-	text: 'Learn nodejs'
+// Set up middleware
+server.use(bodyParser.json());
+
+// CRUD operations
+server.post('/todos', (req, res) => {
+	var todo = new Todo({
+		text: req.body.text
+	});
+
+	todo.save().then((doc) => {
+		res.send(doc);
+	}, (e) => {
+		res
+			.status(400)
+			.send(e);
+	});
 });
-var otherTodo = new Todo({
-	text: 'Learn nodejs',
-	completed: false,
-	completedAt: 123
-});
 
-otherTodo.save().then(() => {
-	console.log(`Save new todo: ${newTodo}`);
-}, (e) => {
-	console.log('Unable to save new todo');
+server.listen(port, () => {
+	console.log(`Server is running on port ${port}`);
 });
