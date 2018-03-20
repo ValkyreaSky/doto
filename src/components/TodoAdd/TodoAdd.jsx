@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from '../../actions/actions';
 
-class TodoAdd extends Component {
+
+export class TodoAdd extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		const inputText = this.refs.input.value;
+		const inputText = this.textInput.value;
 
 		if (inputText.length > 0) {
-			this.refs.input.value = '';
-			this.props.handleAddTodo(inputText);
+			this.textInput.value = '';
+			this.props.dispatch(addTodo(inputText));
 		} else {
-			this.refs.input.focus();
+			this.textInput.focus();
 		}
 	};
 
@@ -18,12 +21,12 @@ class TodoAdd extends Component {
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
-					<input ref="input" type="text" />
+					<input ref={(input) => { this.textInput = input; }} type="text" />
 					<button>Add</button>
 				</form>
 			</div >
-		)
+		);
 	}
 }
 
-export default TodoAdd;
+export default connect()(TodoAdd);

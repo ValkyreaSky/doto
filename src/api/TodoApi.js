@@ -22,4 +22,24 @@ const filterTodos = (todos, showCompleted, searchText) => {
 	return filteredTodos;
 };
 
-export { filterTodos };
+const setTodos = (todos) => {
+	// if (typeof(todos) === 'array') {
+	localStorage.setItem('todos', JSON.stringify(todos));
+	// return todos;
+	// }
+};
+
+const getTodos = () => {
+	var stringTodos = localStorage.getItem('todos');
+	var todos = [];
+
+	try {
+		todos = JSON.parse(stringTodos);
+	} catch (e) {
+		throw new Error(e);
+	}
+	
+	return todos ? todos : [];
+};
+
+export { filterTodos, setTodos, getTodos };

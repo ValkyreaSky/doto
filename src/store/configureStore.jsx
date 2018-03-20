@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux';
-import { searchTextReducer, showCompletedReducer, todosReducer } from '../reducers/reducers';
+import { searchTextReducer, showCompletedReducer, todosReducer } from 'Reducers';
 
 export default () => {
 	const store = createStore(

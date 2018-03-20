@@ -41,7 +41,7 @@ describe('Reducerd', () => {
 				id: 1
 			};
 
-			const response = todosReducer([{ type: 'ADD_TODO', id: 1, text: 'Some text', completed: false}], action);
+			const response = todosReducer([{ type: 'ADD_TODO', id: 1, text: 'Some text', completed: false }], action);
 			
 			expect(response[0].completed).toBe(true);
 			expect(typeof(response[0].completedAt)).toBe('number');

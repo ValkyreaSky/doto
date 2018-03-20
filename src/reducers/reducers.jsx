@@ -32,6 +32,12 @@ const todosReducer = (state = [], action) => {
 				completedAt: undefined
 			}
 		];
+	case 'ADD_TODOS':
+		return action.todos;
+	case 'REMOVE_TODO':
+		return state.filter((todo) => {
+			return todo.id !== action.id;
+		});
 	case 'TOGGLE_TODO':
 		const todosArray = [...state];
 		const index = todosArray.findIndex((todo) => {

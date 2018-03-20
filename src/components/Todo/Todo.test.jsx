@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Todo } from 'Components';
+import { Todo } from 'Components/Todo/Todo';
 
 describe('Todo', () => {
 	test('Should exists', () => {
@@ -9,12 +9,15 @@ describe('Todo', () => {
 		expect(wrapper.exists()).toBe(true);
 	});
 
-	test('Should call onToggle prop with id on click', () => {
+	test('Should dispatch TOGGLE_TODO action on click', () => {
 		const onToggleSpy = jest.fn();
 
-		const wrapper = shallow(<Todo id={12} text={'Sample'} completed={false} onToggle={onToggleSpy} />);
+		const wrapper = shallow(<Todo id={12} text={'Sample'} completed={false} dispatch={onToggleSpy} />);
 		wrapper.find('input').simulate('change');
 
-		expect(onToggleSpy).toHaveBeenCalledWith(12);
+		expect(onToggleSpy).toHaveBeenCalledWith({
+			type: 'TOGGLE_TODO',
+			id: 12
+		});
 	});
 });

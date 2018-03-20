@@ -117,9 +117,10 @@ module.exports = (env) => {
 			alias: {
 				'Components': path.join(__dirname, 'src', 'components'),
 				'Containers': path.join(__dirname, 'src', 'containers'),
+				'Reducers': path.join(__dirname, 'src', 'reducers', 'reducers'),
+				'Actions': path.join(__dirname, 'src', 'actions', 'actions')
 			},
 			modules: ['./src', './node_modules'],
-
 		},
 
 		// Source maps

@@ -12,6 +12,20 @@ const addTodo = (text) => {
 	};
 };
 
+const addTodos = (todos) => {
+	return {
+		type: 'ADD_TODOS',
+		todos
+	};
+};
+
+const removeTodo = (id) => {
+	return {
+		type: 'REMOVE_TODO',
+		id
+	};
+};
+
 const toggleShowCompleted = () => {
 	return {
 		type: 'TOGGLE_SHOW_COMPLETED'
@@ -25,4 +39,4 @@ const toggleTodo = (id) => {
 	};
 };
 
-export { setSearchText, addTodo, toggleShowCompleted, toggleTodo };
+export { setSearchText, addTodo, toggleShowCompleted, toggleTodo, removeTodo, addTodos };
