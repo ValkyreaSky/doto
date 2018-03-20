@@ -5,136 +5,137 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (env) => {
-  const isProduction = env === 'production';
+	const isProduction = env === 'production';
 
-  return {
-    entry: './src/index.jsx',
-    output: {
-      path: path.join(__dirname, 'public'),
-      filename: 'assets/scripts/bundle.js'
-    },
-    module: {
-      rules: [
-        // JavaScript and JSX files loader
-        {
-          test: /\.jsx|js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader'
-        },
+	return {
+		entry: './src/index.jsx',
+		output: {
+			path: path.join(__dirname, 'public'),
+			filename: 'assets/scripts/bundle.js'
+		},
+		module: {
+			rules: [
+				// JavaScript and JSX files loader
+				{
+					test: /\.jsx|js$/,
+					exclude: /node_modules/,
+					loader: 'babel-loader'
+				},
 
-        // Images loader
-        {
-          test: /\.(png|jpe?g|gif)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                outputPath: 'assets/images/',
-                name: '[name].[ext]'
-              }
-            },
-            {
-              loader: 'img-loader',
-              options: {
-                enabled: isProduction
-              }
-            }
-          ]
-        },
+				// Images loader
+				{
+					test: /\.(png|jpe?g|gif)$/,
+					use: [
+						{
+							loader: 'file-loader',
+							options: {
+								outputPath: 'assets/images/',
+								name: '[name].[ext]'
+							}
+						},
+						{
+							loader: 'img-loader',
+							options: {
+								enabled: isProduction
+							}
+						}
+					]
+				},
 
-        // SVG loader
-        {
-          test: /\.svg$/,
-          loader: 'svg-sprite-loader',
-          options: {
-            extract: true,
-            spriteFilename: 'assets/images/sprite.svg'
-          }
-        },
+				// SVG loader
+				{
+					test: /\.svg$/,
+					loader: 'svg-sprite-loader',
+					options: {
+						extract: true,
+						spriteFilename: 'assets/images/sprite.svg'
+					}
+				},
 
-        // Styles loader
-        {
-          test: /\.s|css$/,
-          exclude: [/node_modules/, /\.svg$/],
-          use: ExtractTextPlugin.extract({
-            publicPath: '../../',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  sourceMap: true,
-                  modules: true,
-                  localIdentName: '[local]'
-                }
-              },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  sourceMap: true
-                }
-              },
-              {
-                loader: 'sass-loader',
-                options: {
-                  sourceMap: true
-                }
-              }
-            ]
-          })
-        }
-      ]
-    },
+				// Styles loader
+				{
+					test: /\.s|css$/,
+					exclude: [/node_modules/, /\.svg$/],
+					use: ExtractTextPlugin.extract({
+						publicPath: '../../',
+						use: [
+							{
+								loader: 'css-loader',
+								options: {
+									sourceMap: true,
+									modules: true,
+									localIdentName: '[local]'
+								}
+							},
+							{
+								loader: 'postcss-loader',
+								options: {
+									sourceMap: true
+								}
+							},
+							{
+								loader: 'sass-loader',
+								options: {
+									sourceMap: true
+								}
+							}
+						]
+					})
+				}
+			]
+		},
 
-    // Plugins
-    plugins: [
-      new HTMLPlugin({
-        filename: 'index.html',
-        title: 'Weather App',
-        template: './src/templates/index.html',
-        minify: {
-          collapseWhitespace: isProduction
-        }
-      }),
-      new SpriteLoaderPlugin({
-        plainSprite: true
-      }),
-      new ExtractTextPlugin('assets/styles/styles.css'),
-      new BrowserSyncPlugin({
-        host: 'localhost',
-        port: 3000,
-        proxy: 'http://localhost:8080/',
-        notify: false,
-        open: false
-      },
-        {
-          reload: false
-        })
-    ],
+		// Plugins
+		plugins: [
+			new HTMLPlugin({
+				filename: 'index.html',
+				title: 'Doto',
+				template: './src/templates/index.html',
+				minify: {
+					collapseWhitespace: isProduction
+				}
+			}),
+			new SpriteLoaderPlugin({
+				plainSprite: true
+			}),
+			new ExtractTextPlugin('assets/styles/styles.css'),
+			new BrowserSyncPlugin({
+				host: 'localhost',
+				port: 3000,
+				proxy: 'http://localhost:8080/',
+				notify: false,
+				open: false
+			},
+			{
+				reload: false
+			})
+		],
 
-    // Resolve extensions and modules paths
-    resolve: {
-      extensions: ['.js', '.jsx'],
-      alias: {
-        'Components': path.join(__dirname, 'src', 'components'),
-        'Containers': path.join(__dirname, 'src', 'containers'),
-      },
-      modules: ['./src', './node_modules'],
+		// Resolve extensions and modules paths
+		resolve: {
+			extensions: ['.js', '.jsx'],
+			alias: {
+				'Components': path.join(__dirname, 'src', 'components'),
+				'Containers': path.join(__dirname, 'src', 'containers'),
+				'Reducers': path.join(__dirname, 'src', 'reducers', 'reducers'),
+				'Actions': path.join(__dirname, 'src', 'actions', 'actions')
+			},
+			modules: ['./src', './node_modules'],
+		},
 
-    },
+		// Source maps
+		devtool: isProduction ? 'source-map' : 'inline-source-map',
 
-    // Source maps
-    devtool: isProduction ? 'source-map' : 'inline-source-map',
-
-    // Webpack Dev Server configuration
-    devServer: {
-      contentBase: path.join(__dirname, 'public'),
-      historyApiFallback: true,
-      stats: {
-        all: false,
-        warnings: true,
-        errors: true,
-        errorDetails: true
-      }
-    }
-  }
-}
+		// Webpack Dev Server configuration
+		devServer: {
+			contentBase: path.join(__dirname, 'public'),
+			historyApiFallback: true,
+			stats: {
+				all: false,
+				warnings: true,
+				errors: true,
+				errorDetails: true
+			}
+		}
+	};
+};
