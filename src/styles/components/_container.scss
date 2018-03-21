@@ -1,0 +1,58 @@
+.container {
+	background-color: white;
+	max-width: 114rem;
+	margin: 0 auto;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+	display: flex;
+	justify-content: space-between;
+}
+
+.lists {
+	flex: 0 0 20%;
+	background-color: rgb(241, 241, 241);
+	border-right: 1px solid black;
+}
+
+.list {
+	flex:  1 0 0 ;
+	padding: 1rem;
+}
+
+.todo {
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+
+	&__info {
+		margin-right: auto;
+	}
+
+	&__text {
+		font-size: 1.7rem;
+	}
+
+	&__date {
+		font-size: 1.3rem;
+		color: $color-text-1;
+	}
+
+	&:nth-child(2) {
+		border-top: 1px solid rgb(233, 233, 233);
+	}
+
+	&__checkbox {
+		margin-right: 1.5rem;
+	}
+
+	&__button {
+		padding: 0.8rem;
+		font-size: 1.2rem;
+		font-family: inherit;
+		border: 1px solid rgb(153, 153, 153);
+		background-color: transparent;
+		border-radius: 10rem;
+	}
+}

@@ -1,6 +1,23 @@
 import uuid from 'uuid';
 import moment from 'moment';
 
+const listsReducer = (state = '', action) => {
+	return [
+		{
+			id: 123,
+			name: 'List Pierwsza'
+		},
+		{
+			id: 1234,
+			name: 'List Druga'
+		},
+		{
+			id: 12345,
+			name: 'List Trzecia'
+		}
+	];
+};
+
 const searchTextReducer = (state = '', action) => {
 	switch (action.type) {
 	case 'SET_SEARCH_TEXT':
@@ -25,23 +42,19 @@ const todosReducer = (state = [], action) => {
 		return [
 			...state,
 			{
-				id: uuid(),
-				text: action.text,
-				completed: false,
-				createdAt: moment().unix(),
-				completedAt: undefined
+				...action.todo
 			}
 		];
 	case 'ADD_TODOS':
 		return action.todos;
 	case 'REMOVE_TODO':
 		return state.filter((todo) => {
-			return todo.id !== action.id;
+			return todo._id !== action.id;
 		});
 	case 'TOGGLE_TODO':
 		const todosArray = [...state];
 		const index = todosArray.findIndex((todo) => {
-			return todo.id === action.id;
+			return todo._id === action.id;
 		});
 		
 		todosArray[index].completed = !todosArray[index].completed;
@@ -57,4 +70,4 @@ const todosReducer = (state = [], action) => {
 	}
 };
 
-export { searchTextReducer, showCompletedReducer, todosReducer };
+export { searchTextReducer, showCompletedReducer, todosReducer, listsReducer };

@@ -1,10 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { toggleTodo, removeTodo } from '../../actions/actions';
+import { toggleTodo, removeTodo, startRemoveTodo } from '../../actions/actions';
 
 export const Todo = (props) => {
-	const { id, text, completed, createdAt, completedAt, dispatch } = props;
+	const { _id, text, completed, createdAt, completedAt, dispatch } = props;
 	
 	const renderDate = () => {
 		let message, timestamp;
@@ -21,17 +21,18 @@ export const Todo = (props) => {
 	};
 
 	return (
-		<div>
-			<hr />
+		<div className='todo'>
 			<input
 				type="checkbox"
 				checked={completed}
-				onChange={() => {dispatch(toggleTodo(id));}}
+				onChange={() => {dispatch(toggleTodo(_id));}}
+				className="todo__checkbox"
 			/>
-			<p>{text}</p>
-			<p>{renderDate()}</p>
-			<button onClick={() => dispatch(removeTodo(id))}>Remove</button>
-			<hr />
+			<div className="todo__info">
+				<p className="todo__text">{text}</p>
+				<p className="todo__date">{renderDate()}</p>
+			</div>
+			<button className="todo__button" onClick={() => dispatch(startRemoveTodo(_id))}>Remove</button>
 		</div>
 	);
 };

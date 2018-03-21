@@ -12,7 +12,7 @@ export class TodoList extends Component {
 				return <p>nothung</p>;
 			} else {
 				return filterTodos(todos, showCompleted, searchText	).map((todo) => {
-					return <Todo key={todo.id} {...todo} />;
+					return <Todo key={todo._id} {...todo} />;
 				});
 			}
 		};

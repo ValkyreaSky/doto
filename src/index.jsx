@@ -3,29 +3,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import { ListContainer } from 'Containers';
+import './styles/main.scss';
+
+// Two main containers
+import { ListContainer, ListsContainer } from 'Containers';
 
 // Create Redux store
 import configureStore from './store/configureStore';
 const store = configureStore();
 
-import { setTodos, getTodos } from './api/TodoApi';
-import { addTodos } from './actions/actions';
+import { getTodos } from './actions/actions';
 
+store.dispatch(getTodos());
 
-var initialTodos = getTodos();
-store.dispatch(addTodos(initialTodos));
-
-
-store.subscribe(() => {
-	var state = store.getState();
-	setTodos(state.todos);
-});
 
 
 const jsx = (
 	<Provider store={store}>
-		<ListContainer />
+		<div className='container'>
+			<ListsContainer />
+			<ListContainer />
+		</div>
 	</Provider>
 );
 

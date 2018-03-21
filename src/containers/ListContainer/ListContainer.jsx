@@ -4,7 +4,7 @@ import { TodoList, TodoAdd, TodoSearch } from 'Components';
 class ListContainer extends Component {
 	render() {
 		return (
-			<div>
+			<div className="list">
 				<TodoSearch />
 				<TodoList />
 				<TodoAdd />
